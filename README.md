@@ -2,7 +2,7 @@
 
 - PyCharm IDE
 - Anaconda virtual environment (Python 3.7)
-
+---
 # Magenta 모델 설치, 실행 방법
 
 ## 1. 개발 환경 설정
@@ -35,3 +35,5 @@ FLAGS.config = 'drums' #'onsets_frames' : piano, 'drums' : drum
 .
 argv_path = './drum_Test.txt' # piano_Train, piano_Test, drum_Train, drum_Test
 ```
+---
+
