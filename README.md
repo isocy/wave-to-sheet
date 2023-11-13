@@ -15,12 +15,23 @@
 
 ``` pip install -e . ```
 
-## 2. [checkpoint](https://storage.googleapis.com/magentadata/models/onsets_frames_transcription/maestro_checkpoint.zip) 설치
+## 2. checkpoint 설치
+- [piano model checkpoint](https://storage.googleapis.com/magentadata/models/onsets_frames_transcription/maestro_checkpoint.zip) which is trained on the MAESTRO dataset
+- [drum model checkpoint](https://storage.googleapis.com/magentadata/models/onsets_frames_transcription/e-gmd_checkpoint.zip) which is trained on the E-GMD dataset
 
 ## 3. 실행
 
-onsets_frames_trascription_transcribe.py 파일의 Run Configuration을 아래의 파라미터로 작성하여 실행
-```
---model_dir=<path to directory containing checkpoint>
-<piano_recording1.wav, piano_recording2.wav, ...>
+[0_1_args.py](0_1_args.py)
+
+midi file로 변환할 .wav 파일이 저장되어 있는 경로를 텍스트 파일로 저장 
+
+[0_model_test.py](0_model_test.py)
+- FLAGS config 값을 'onesets_frames' 또는 'drums'로 변경
+- .wav 파일의 경로가 저장되어 있는 텍스트 파일의 경로 지정 
+```python
+FLAGS.config = 'drums' #'onsets_frames' : piano, 'drums' : drum
+.
+.
+.
+argv_path = './drum_Test.txt' # piano_Train, piano_Test, drum_Train, drum_Test
 ```
