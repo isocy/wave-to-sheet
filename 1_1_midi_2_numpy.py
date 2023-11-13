@@ -120,18 +120,6 @@ class Read_midi(object):
             notes_on = []
             for message in track:
 
-                ##########################################
-                ##########################################
-                ##########################################
-                # TODO : keep track of tempo information
-                # import re
-                # if re.search("tempo", message.type):
-                #     import pdb; pdb.set_trace()
-                ##########################################
-                ##########################################
-                ##########################################
-
-
                 # print message
                 # Time. Must be incremented, whether it is a note on/off or not
                 time = float(message.time)
