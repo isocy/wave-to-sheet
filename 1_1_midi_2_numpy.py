@@ -5,8 +5,8 @@ from mido import MidiFile
 from unidecode import unidecode
 import glob
 import numpy as np
+import os
 import matplotlib.pyplot as plt
-import itertools
 
 #######
 # Pianorolls dims are  :   TIME  *  PITCH
@@ -200,6 +200,7 @@ if __name__ == '__main__':
         if len(midis[i]) < max_len:
             midis[i] = np.concatenate([midis[i], padding])
 
+    # visualizing midi file
     # for midi, file in zip(midis,midi_files):
     #     plt.plot(range(midi.shape[0]), np.multiply(np.where(midi > 0, 1, 0), range(1, 129)), marker='.',
     #              markersize=1, linestyle='')
@@ -210,6 +211,9 @@ if __name__ == '__main__':
     midis = np.expand_dims(midis, axis=3)
 
     save_path = './data/'
+    if not os.path.isdir(save_path):
+        os.mkdir(save_path)
+
     file_name = 'midi.npy'
     np.save(save_path + file_name, midis)
 
