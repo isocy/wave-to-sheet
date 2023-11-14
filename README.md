@@ -37,3 +37,16 @@ onsets_frames_trascription_transcribe.py 파일의 Run Configuration을 아래�
     MuseScore3_exe_path = "C:/Program Files/MuseScore 3/bin/MuseScore3.exe"
 
 파라미터를 수정하고 py를 실행하면 지정된 폴더의 midi 파일들이 MuseScore3에 의해 악보화 됩니다.
+
+---
+# CycleGAN
+
+## 1. Numpy Array Format으로 저장
+
+[1_sheet_2_numpy.py](1_sheet_2_numpy.py)
+
+악보 이미지를 numpy 배열로 변환하여 .npy 파일로 저장
+
+[1_1_midi_2_numpy.py](1_1_midi_2_numpy.py)
+
+midi 파일을 numpy 배열로 변환하여 .npy 파일로 저장
