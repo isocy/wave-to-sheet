@@ -19,3 +19,4 @@ for file in file_list:
     binary_image = new_image.convert('1')
     # 변환된 이미지 저장
     binary_image.save(f'./binary_sheets/binary_{file}')
+

@@ -2,7 +2,7 @@ import os.path
 import subprocess
 import logging
 
-logging.basicConfig(filename='midi_to_png.log',
+logging.basicConfig(filename='midi_to_sheet.log',
                     level=logging.INFO,
                     format='%(asctime)s:%(levelname)s:%(message)s')
 def logging_midi_to_sheet(midi_path, output_path, MuseScore3_exe_path):
