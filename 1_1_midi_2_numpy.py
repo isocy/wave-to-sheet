@@ -6,6 +6,7 @@ from unidecode import unidecode
 import glob
 import numpy as np
 import os
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 #######
@@ -187,18 +188,22 @@ def dict_to_matrix(pianoroll):
 if __name__ == '__main__':
     path = './midi_and_sheet/'
     midi_files = glob.glob(path + '*.mid')
-
     midis = []
-    for file in midi_files:
-        midi = Read_midi(file, 4).read_file()
-        midi = dict_to_matrix(midi)
-        midis.append(midi)
+    for file in tqdm(midi_files):
+        try:
+            midi = Read_midi(file, 4).read_file()
+            midi = dict_to_matrix(midi)
+            # midi = np.pad(midi,[(0,0),(0,128)],'constant',constant_values=0)
+            midis.append(midi)
+        except:
+            continue
 
-    max_len = len(max(midis, key=len))
     for i in range(len(midis)):
-        padding = np.array([[0]*128]*(max_len-len(midis[i])))
-        if len(midis[i]) < max_len:
+        padding = np.array([[0]*128]*(128-len(midis[i])))
+        if len(midis[i]) < 128:
             midis[i] = np.concatenate([midis[i], padding])
+        elif len(midis[i]) > 128:
+            midis[i] = midis[i][:128]
 
     # visualizing midi file
     # for midi, file in zip(midis,midi_files):
@@ -209,12 +214,13 @@ if __name__ == '__main__':
 
     midis = np.asarray(midis)
     midis = np.expand_dims(midis, axis=3)
+    print(midis.shape)
 
     save_path = './data/'
     if not os.path.isdir(save_path):
         os.mkdir(save_path)
 
-    file_name = 'midi.npy'
+    file_name = 'midi_{}.npy'.format(midis.shape[1:3])
     np.save(save_path + file_name, midis)
 
 
