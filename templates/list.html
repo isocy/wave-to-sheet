@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+    <head>
+        <title>FILE LIST</title>
+    </head>
+    <body>
+        <div align="center">
+            <a href="/">첫 페이지로</a><br><br>
+            <ul>
+                {% for file in uploaded_file %}
+                <li>{{file}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
