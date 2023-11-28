@@ -175,7 +175,7 @@ def main(argv):
     with open(argv_path, 'r') as f:
         for file in f.readlines():
             argv.append(file[:-1])
-
+    print(argv)
     run(argv, config_map=configs.CONFIG_MAP, data_fn=data.provide_batch)
 
 def console_entry_point():
