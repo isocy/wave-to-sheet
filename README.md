@@ -61,10 +61,28 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 
 - [index.html](./templates/index.html): 어플리케이션 첫 페이지
     - 파일 업로드: .wav 파일을 업로드
-    - 파일 목록: 업로드한 파일을 리스트로 화면에 보여줌
+
+
+- [fail.html](./templates/fail.html): 파일 업로드 실패 시 실행 페이지
+
+
+- [view.html](./templates/view.html): 파일 업로드 성공 시
+  - .wav 파일의 악보 생성
+
+
+
+To-Do List
+
+2. midi -> sheet(musicscore) 호출
+3. 로딩 중 표시 (12/4)
+4. 악보 다음 페이지 넘기기 (12/5) 
+5. wav 파일 아래에 재생, 일시 정지, 정지 (12/6)
+6. 악보 재생, 일시 정지, 정지 (12/7)
+7. 악보 png, jpeg ... 저장 기능 (12/11)
+(~12.15)
 
 ---
-# CycleGAN (실패)
+# ~~CycleGAN~~
 
 ## 1. Numpy Array Format으로 저장
 
