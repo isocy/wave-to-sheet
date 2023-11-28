@@ -67,9 +67,7 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 
 
 - [view.html](./templates/view.html): 파일 업로드 성공 시
-  - .wav 파일의 악보 생성
-
-
+  - [wav to midi](wav_to_midi.py): onset_frames(piano) 모델을 사용하여 midi 파일 생성
 
 To-Do List
 

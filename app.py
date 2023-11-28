@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 
-from music_to_sheet import wav_to_midi
+from wav_to_midi import wav_to_midi
 
 import os
 

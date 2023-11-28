@@ -141,6 +141,9 @@ def wav_to_midi(filename):
 
     run(argv, config_map=configs.CONFIG_MAP, data_fn=data.provide_batch)
 
+def midi_to_sheet():
+    pass
+
 filename = 'arpeggio-01-36024.wav'
 wav_to_midi(filename)
 
