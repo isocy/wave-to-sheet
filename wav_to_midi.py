@@ -1,35 +1,20 @@
-# Copyright 2023 The Magenta Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""Transcribe a recording of piano audio."""
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
-from tqdm import tqdm
-import os
 
 from magenta.models.onsets_frames_transcription import audio_label_data_utils
 from magenta.models.onsets_frames_transcription import configs
 from magenta.models.onsets_frames_transcription import data
 from magenta.models.onsets_frames_transcription import infer_util
 from magenta.models.onsets_frames_transcription import train_util
+
 from note_seq import midi_io
 from note_seq.protobuf import music_pb2
 import six
 import tensorflow.compat.v1 as tf
+
+from tqdm import tqdm
+import os
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -51,11 +36,6 @@ tf.app.flags.DEFINE_boolean(
 tf.app.flags.DEFINE_string(
     'transcribed_file_suffix', '',
     'Optional suffix to add to transcribed files.')
-tf.app.flags.DEFINE_string(
-    'log', 'INFO',
-    'The threshold for what messages will be logged: '
-    'DEBUG, INFO, WARN, ERROR, or FATAL.')
-
 
 def create_example(filename, sample_rate, load_audio_with_librosa):
   """Processes an audio file into an Example proto."""
@@ -74,11 +54,8 @@ def create_example(filename, sample_rate, load_audio_with_librosa):
   assert len(example_list) == 1
   return example_list[0].SerializeToString()
 
-
 def run(argv, config_map, data_fn):
   """Create transcriptions."""
-  # tf.logging.set_verbosity(FLAGS.log)
-
   config = config_map[FLAGS.config]
   hparams = config.hparams
   hparams.parse(FLAGS.hparams)
@@ -109,7 +86,7 @@ def run(argv, config_map, data_fn):
           tf.initializers.local_variables()
       ])
 
-      for filename in tqdm(argv, desc='Transcription to midi file'):
+      for filename in argv:
         # tf.logging.info('Starting transcription for %s...', filename)
 
         # The reason we bounce between two Dataset objects is so we can use
@@ -141,46 +118,29 @@ def run(argv, config_map, data_fn):
         sequence_prediction = music_pb2.NoteSequence.FromString(
             prediction_list[0]['sequence_predictions'][0])
 
-        if FLAGS.config == 'drums':
-            instrument = 'drum'
-        elif FLAGS.config == 'onsets_frames':
-            instrument = 'piano'
-
-        if 'Train' in filename:
-            train_or_test = 'Train'
-        elif 'Test' in filename:
-            train_or_test = 'Test'
-
-        midi_path = './{}_{}_midi'.format(instrument, train_or_test)
+        midi_path = 'midi/'
         if not os.path.isdir(midi_path):
             os.mkdir(midi_path)
-        origin_filename = filename.split('\\')
-        midi_path += '/'+origin_filename[-1]
 
-        midi_filename = midi_path + FLAGS.transcribed_file_suffix + '.midi'
+        wav_path = filename.split('\\\\')
+        idx = wav_path[-1].find('.wav')
+
+        midi_path += wav_path[-1][:idx]
+        midi_filename = midi_path + '.midi'
+
         midi_io.sequence_proto_to_midi_file(sequence_prediction, midi_filename)
 
         tf.logging.info('Transcription written to %s.', midi_filename)
 
+def wav_to_midi(filename):
+    FLAGS.config = 'onsets_frames'
+    FLAGS.model_dir = './models/maestro'
 
-def main(argv):
-    FLAGS.config = 'drums' #'onsets_frames' : piano, 'drums' : drum
-    if FLAGS.config == 'onsets_frames':
-        FLAGS.model_dir = './models/maestro'
-    elif FLAGS.config == 'drums':
-        FLAGS.model_dir = './models/e-gmd'
+    wav_path = 'uploads\\\\'+filename
+    argv = [wav_path]
 
-    argv_path = './drum_Test.txt'
-    argv = []
-    with open(argv_path, 'r') as f:
-        for file in f.readlines():
-            argv.append(file[:-1])
-    print(argv)
     run(argv, config_map=configs.CONFIG_MAP, data_fn=data.provide_batch)
 
-def console_entry_point():
-  tf.disable_v2_behavior()
-  tf.app.run(main)
+# filename = 'arpeggio-01-36024.wav'
+# wav_to_midi(filename)
 
-if __name__ == '__main__':
-  console_entry_point()
