@@ -1,7 +1,10 @@
+import glob
+
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 
 from wav_to_midi import wav_to_midi
+from midi_to_sheet import midi_to_sheet
 
 import os
 
@@ -35,10 +38,19 @@ def view():
             while not os.path.isfile(midi):
                 continue
 
-            return render_template('view.html',filename=filename, midi=midi)
+            musescore_exe_path = 'C:\\Program Files\\MuseScore 3\\bin\\MuseScore3.exe'
+            sheet = 'static/images/'
+
+            midi_to_sheet(midi, sheet, musescore_exe_path)
+
+            sheet += filename[:idx]+'*.png'
+            sheets = glob.glob(sheet)
+            for i in range(len(sheets)):
+                sheets[i] = 'images/'+sheets[i].split('\\')[-1]
+            print('\n',sheets)
+
+            return render_template('view.html',filename=filename, sheets=sheets)
     return render_template('fail.html')
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

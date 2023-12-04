@@ -39,14 +39,14 @@ argv_path = './drum_Test.txt' # piano_Train, piano_Test, drum_Train, drum_Test
 # 미디를 악보화하는 방법
 
 ## midi_to_sheets.py를 사용합니다
-
+```python
     # 미디 폴더를 지정
     midi_folder = "./Moon_test_folder/midi/"
     # 출력 폴더를 지정
     sheet_folder = "./Moon_test_folder/sheets"
     # MuseScore3.exe의 경로를 지정
     MuseScore3_exe_path = "C:/Program Files/MuseScore 3/bin/MuseScore3.exe"
-
+```
 파라미터를 수정하고 py를 실행하면 지정된 폴더의 midi 파일들이 MuseScore3에 의해 악보화 됩니다.
 
 ---
@@ -68,16 +68,13 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 
 - [view.html](./templates/view.html): 파일 업로드 성공 시
   - [wav to midi](wav_to_midi.py): onset_frames(piano) 모델을 사용하여 midi 파일 생성
+  - [midi to sheet](./midi_to_sheet.py): midi 파일의 악보를 이미지로 생성 ([MuseScore3](https://musescore.informer.com/download/?ca1afaf5) 설치 필요)
 
 To-Do List
 
-2. midi -> sheet(musicscore) 호출
-3. 로딩 중 표시 (12/4)
-4. 악보 다음 페이지 넘기기 (12/5) 
-5. wav 파일 아래에 재생, 일시 정지, 정지 (12/6)
-6. 악보 재생, 일시 정지, 정지 (12/7)
-7. 악보 png, jpeg ... 저장 기능 (12/11)
-(~12.15)
+1. 악보 다음 페이지 넘기기 (~12/6) 
+2. wav 파일 아래에 재생, 일시 정지, 정지 (~12/12)
+3. 악보 png, jpeg ... 저장 기능 (~12/15)
 
 ---
 # ~~CycleGAN~~
