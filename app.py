@@ -1,6 +1,6 @@
 import glob
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 from wav_to_midi import wav_to_midi
@@ -49,8 +49,23 @@ def view():
                 sheets[i] = 'images/'+sheets[i].split('\\')[-1]
             print('\n',sheets)
 
-            return render_template('view.html',filename=filename, sheets=sheets)
+            return render_template('view.html',filename=filename, sheets=sheets, sheet_idx=0)
     return render_template('fail.html')
+
+@app.route('/view/<string:name>/<int:idx>')
+def view_sheet(name, idx):
+
+    name_idx = name.find('.wav')
+
+    sheet = 'static/images/'
+    sheet += name[:name_idx] + '*.png'
+
+    sheets = glob.glob(sheet)
+    for i in range(len(sheets)):
+        sheets[i] = 'images/' + sheets[i].split('\\')[-1]
+    print('\n', sheets)
+
+    return render_template('view.html',filename=name,sheets=sheets,sheet_idx=idx)
 
 if __name__ == '__main__':
     app.run(debug=True)
