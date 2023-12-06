@@ -57,7 +57,15 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 
 - [app.py](./app.py): 어플리케이션 실행 파일
     - 로컬 호스트에서 실행(127.0.0.1:5000)
-
+    - ```python
+      # 업로드한 wav 파일을 악보 이미지로 생성해주는 프로세스
+      @app.route('/view',methods=['GET','POST'])
+      def view():
+       
+      # 인덱스에 맞는 악보 페이지를 다시 출력하도록 함 
+      @app.route('/view/<string:name>/<int:idx>')
+      def view_sheet(name, idx):
+      ```
 
 - [index.html](./templates/index.html): 어플리케이션 첫 페이지
     - 파일 업로드: .wav 파일을 업로드
@@ -69,11 +77,29 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 - [view.html](./templates/view.html): 파일 업로드 성공 시
   - [wav to midi](wav_to_midi.py): onset_frames(piano) 모델을 사용하여 midi 파일 생성
   - [midi to sheet](./midi_to_sheet.py): midi 파일의 악보를 이미지로 생성 ([MuseScore3](https://musescore.informer.com/download/?ca1afaf5) 설치 필요)
+  - ```html
+    <!-- 악보가 여러 장일 때 이전 버튼과 다음 버튼을 클릭했을 때 이벤트 발생 -->
+    <script type="text/javascript">
+    document.getElementById("prev").addEventListener("click",prev);
+    document.getElementById("next").addEventListener("click",next);
+    
+    <!-- 이전 버튼을 클릭했을 때 호출되는 함수 -->
+    function prev(){
+      이전 악보 이미지를 출력
+    }
+    
+    <!-- 다음 버튼을 클릭했을 때 호출되는 함수 -->
+    function next(){
+      다음 악보 이미지를 출력
+    }
+    </script>
+    ```
+
 
 To-Do List
 
-1. 악보 다음 페이지 넘기기 (~12/6) 
-2. wav 파일 아래에 재생, 일시 정지, 정지 (~12/12)
+1. 로딩 중 표시 (~12/8)
+2. wav 파일 아래에 재생, 일시 정지, 정지 (~12/13)
 3. 악보 png, jpeg ... 저장 기능 (~12/15)
 
 ---

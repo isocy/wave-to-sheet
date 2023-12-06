@@ -15,8 +15,9 @@
     </div>
     <hr width="100%" color="black"/>
     <div align="center" class="sheet" style="position: relative">
-        {% if sheets | length > 1 :%}
-        <button style="position: fixed;
+        {% if sheets | length > 1: %}
+        <button type="button" id="prev"
+                style="position: fixed;
         top: 50%;
         margin-top: -50px;
         left: 10%;
@@ -26,10 +27,12 @@
         </button>
         {% endif %}
         {% if True %}
-            <img src="{{url_for('static',filename=sheets[0])}}" width="60%" height="60%">
+            <h3>{{sheet_idx+1}} / {{sheets | length}}</h3>
+            <img src="{{url_for('static',filename=sheets[sheet_idx])}}" id="sheet" width="60%" height="60%" alt="{{sheets[sheet_idx]}}">
         {% endif %}
-        {% if sheets | length > 1 :%}
-        <button style="position: fixed;
+        {% if sheets | length > 1 : %}
+        <button type="button" id="next"
+                style="position: fixed;
         top: 50%;
         margin-top: -50px;
         right: 10%;
@@ -38,6 +41,50 @@
             <img src="{{url_for('static',filename='images/next.png')}}" width="100" height="100">
         </button>
         {% endif %}
+
+         <script type="text/javascript">
+            document.getElementById("prev").addEventListener("click",prev);
+            document.getElementById("next").addEventListener("click",next);
+
+            length = {{sheets | length }};
+            var idx = {{sheet_idx}};
+            let filename = '{{filename}}';
+
+            function prev(){
+                if (idx == 0){
+                    idx = length - 1;
+                }
+                else{
+                    idx--;
+                }
+
+                let sheet_url = window.location.href
+                var url_idx = sheet_url.indexOf(filename)
+                if(url_idx > 0 ){
+                    sheet_url = sheet_url.substring(0,url_idx-1)
+                }
+                sheet_url = sheet_url + "/" + filename + "/" + idx;
+
+                window.location.replace(sheet_url);
+            }
+
+            function next(){
+                if (idx == length-1){
+                    idx = 0;
+                }
+                else{
+                    idx++;
+                }
+
+                let sheet_url = window.location.href
+                var url_idx = sheet_url.indexOf(filename)
+                if(url_idx > 0 ){
+                    sheet_url = sheet_url.substring(0,url_idx-1)
+                }
+                sheet_url = sheet_url + "/" + filename + "/" + idx;
+                window.location.replace(sheet_url);
+            }
+        </script>
     </div>
 </body>
 </html>
