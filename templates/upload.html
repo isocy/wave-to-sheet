@@ -2,7 +2,8 @@
 <meta charset="UTF-8">
 <html>
   <head>
-    <title>MUSIC TO SHEET</title>
+      <title>MUSIC TO SHEET</title>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   </head>
 
   <body>
@@ -21,12 +22,37 @@
               method = "POST"
               enctype = "multipart/form-data">
             <input type = "file" name = "file" />
-            <input type = "submit" value="변환!!"/>
+            <input type = "submit" value="변환!!" id="transcription"/>
         </form>
     </div>
     <hr width="100%" color="black"/>
 
+    <div align="center" id="loading">
+        <p> Loading... </p>
+        <img src="{{url_for('static', filename='images/loading.gif')}}" width="200" height="200" />
+    </div>
+    <style>
+        div#loading{
+            text-align: center;
+            display: none;
+            cursor: wait;
+        }
+    </style>
+    <script type="text/javascript">
+        const button = document.getElementById("transcription");
 
-
+        button.addEventListener("click", () => {
+            $("#loading").show();
+        });
+    </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+

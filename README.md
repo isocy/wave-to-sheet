@@ -58,11 +58,15 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 - [app.py](./app.py): 어플리케이션 실행 파일
     - 로컬 호스트에서 실행(127.0.0.1:5000)
     - ```python
-      # 업로드한 wav 파일을 악보 이미지로 생성해주는 프로세스
+      # 악보 이미지를 보여주는 웹페이지 랜더링
       @app.route('/view',methods=['GET','POST'])
       def view():
+      
+      # 업로드한 wav 파일을 악보 이미지로 생성해주는 프로세스
+      @app.route('/loading/<filename>')
+      def loading(filename):
        
-      # 인덱스에 맞는 악보 페이지를 다시 출력하도록 함 
+      # 인덱스에 맞는 악보 페이지를 웹페이지에 다시 출력하도록 함 
       @app.route('/view/<string:name>/<int:idx>')
       def view_sheet(name, idx):
       ```
@@ -70,9 +74,11 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 - [index.html](./templates/index.html): 어플리케이션 첫 페이지
     - 파일 업로드: .wav 파일을 업로드
 
+- [upload.html](./templates/upload.html): 파일 업로드 페이지
+  - .wav 파일을 선택하고 변환 버튼을 누르면 악보 이미지 생성 
+  - 악보 로딩 화면 추가
 
 - [fail.html](./templates/fail.html): 파일 업로드 실패 시 실행 페이지
-
 
 - [view.html](./templates/view.html): 파일 업로드 성공 시
   - [wav to midi](wav_to_midi.py): onset_frames(piano) 모델을 사용하여 midi 파일 생성
@@ -98,9 +104,8 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 
 To-Do List
 
-1. 로딩 중 표시 (~12/8)
-2. wav 파일 아래에 재생, 일시 정지, 정지 (~12/13)
-3. 악보 png, jpeg ... 저장 기능 (~12/15)
+1. wav 파일 아래에 재생, 일시 정지, 정지 (~12/12)
+2. 악보 png, jpeg ... 저장 기능 (~12/15)
 
 ---
 # ~~CycleGAN~~
