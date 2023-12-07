@@ -24,33 +24,45 @@ def allowed_file(filename):
 
 @app.route('/view',methods=['GET','POST'])
 def view():
-    if 'file' in request.files:
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save('./uploads/'+filename)
+    filename = request.args.get('filename')
+    sheets = request.args.getlist('sheets')
+    if filename is None and len(sheets)==0:
+        if 'file' in request.files:
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save('./uploads/'+filename)
 
-            # 악보 생성
-            wav_to_midi(filename)
-            idx = filename.find('.wav')
-            midi = 'midi/'+filename[:idx]+'.midi'
+                return redirect(url_for('loading', filename=filename))
 
-            while not os.path.isfile(midi):
-                continue
+        return render_template('fail.html')
 
-            musescore_exe_path = 'C:\\Program Files\\MuseScore 3\\bin\\MuseScore3.exe'
-            sheet = 'static/images/'
+    print(filename)
+    print(sheets)
 
-            midi_to_sheet(midi, sheet, musescore_exe_path)
+    return render_template('view.html', filename=filename, sheets=sheets, sheet_idx=0)
 
-            sheet += filename[:idx]+'*.png'
-            sheets = glob.glob(sheet)
-            for i in range(len(sheets)):
-                sheets[i] = 'images/'+sheets[i].split('\\')[-1]
-            print('\n',sheets)
+@app.route('/loading/<filename>')
+def loading(filename):
+    # 악보 생성
+    wav_to_midi(filename)
+    idx = filename.find('.wav')
+    midi = 'midi/' + filename[:idx] + '.midi'
 
-            return render_template('view.html',filename=filename, sheets=sheets, sheet_idx=0)
-    return render_template('fail.html')
+    while not os.path.isfile(midi):
+        continue
+
+    musescore_exe_path = 'C:\\Program Files\\MuseScore 3\\bin\\MuseScore3.exe'
+    sheet = 'static/images/'
+
+    midi_to_sheet(midi, sheet, musescore_exe_path)
+
+    sheet += filename[:idx] + '*.png'
+    sheets = glob.glob(sheet)
+    for i in range(len(sheets)):
+        sheets[i] = 'images/' + sheets[i].split('\\')[-1]
+
+    return redirect(url_for('view', filename=filename, sheets=sheets))
 
 @app.route('/view/<string:name>/<int:idx>')
 def view_sheet(name, idx):
@@ -63,9 +75,8 @@ def view_sheet(name, idx):
     sheets = glob.glob(sheet)
     for i in range(len(sheets)):
         sheets[i] = 'images/' + sheets[i].split('\\')[-1]
-    print('\n', sheets)
 
-    return render_template('view.html',filename=name,sheets=sheets,sheet_idx=idx)
+    return render_template('view.html', filename=name, sheets=sheets, sheet_idx=idx)
 
 if __name__ == '__main__':
     app.run(debug=True)

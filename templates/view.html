@@ -59,9 +59,9 @@
                 }
 
                 let sheet_url = window.location.href
-                var url_idx = sheet_url.indexOf(filename)
+                var url_idx = sheet_url.indexOf('view')
                 if(url_idx > 0 ){
-                    sheet_url = sheet_url.substring(0,url_idx-1)
+                    sheet_url = sheet_url.substring(0,url_idx+4)
                 }
                 sheet_url = sheet_url + "/" + filename + "/" + idx;
 
@@ -77,9 +77,9 @@
                 }
 
                 let sheet_url = window.location.href
-                var url_idx = sheet_url.indexOf(filename)
+                var url_idx = sheet_url.indexOf('view')
                 if(url_idx > 0 ){
-                    sheet_url = sheet_url.substring(0,url_idx-1)
+                    sheet_url = sheet_url.substring(0,url_idx+4)
                 }
                 sheet_url = sheet_url + "/" + filename + "/" + idx;
                 window.location.replace(sheet_url);
