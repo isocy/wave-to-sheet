@@ -31,7 +31,7 @@ def view():
             file = request.files['file']
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                file.save('./uploads/'+filename)
+                file.save('./static/audio/'+filename)
 
                 return redirect(url_for('loading', filename=filename))
 
