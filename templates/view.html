@@ -12,6 +12,10 @@
     <hr width="100%" color="black"/>
     <div align="center">
         <h2> {{filename}}</h2>
+        <audio controls>
+            <source src="{{url_for('static', filename='audio/'+filename)}}" type="audio/wav">
+            지원하지 않는 포맷입니다.
+        </audio>
     </div>
     <hr width="100%" color="black"/>
     <div align="center" class="sheet" style="position: relative">
