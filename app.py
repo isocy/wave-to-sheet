@@ -90,12 +90,10 @@ def download(filename):
 
     idx = filename.find('.wav')
     img = filename[:idx]+'*.png'
-    imgs = img_path+img
 
     stream = BytesIO()
     with ZipFile(stream, 'w') as zf:
-        for file in glob.glob(imgs):
-            print(file)
+        for file in glob.glob(os.path.join(img_path,img)):
             zf.write(file, os.path.basename(file))
     stream.seek(0)
 
