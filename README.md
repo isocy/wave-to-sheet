@@ -120,9 +120,9 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 <div>
 <p align="center">2600epochs</p>
 <img src='./static/images/AtoB_generated_plot_002600.png' width=50% height=50% /><img src='./static/images/BtoA_generated_plot_002600.png' width=50% height=50% />
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; midi->png &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; png->midi
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; midi->png &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; png->midi
 <p align="center">6500epochs</p><img src='./static/images/AtoB_generated_plot_006500.png' width=50% height=50% /><img src='./static/images/BtoA_generated_plot_006500.png' width=50% height=50% />
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; midi->png &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; png->midi
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; midi->png &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; png->midi
 </div>
 
 ### Numpy Array Format으로 저장
