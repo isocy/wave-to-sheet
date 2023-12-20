@@ -118,11 +118,8 @@ Flask 웹 프레임워크를 사용하여 Web 어플리케이션 제작
 - CycleGAN 모델을 이용하여 midi 파일을 악보 이미지(png) 파일로 생성할 수 있도록 하려고 하였으나 학습이 제대로 이루어지지 않음
 
 <div>
-<p align="center">2600epochs</p>
-<img src='./static/images/AtoB_generated_plot_002600.png' width=50% height=50% /><img src='./static/images/BtoA_generated_plot_002600.png' width=50% height=50% />
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; midi->png &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; png->midi
+<p align="center">2600epochs</p><img src='./static/images/AtoB_generated_plot_002600.png' width=50% height=50% /><img src='./static/images/BtoA_generated_plot_002600.png' width=50% height=50% />
 <p align="center">6500epochs</p><img src='./static/images/AtoB_generated_plot_006500.png' width=50% height=50% /><img src='./static/images/BtoA_generated_plot_006500.png' width=50% height=50% />
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; midi->png &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; png->midi
 </div>
 
 ### Numpy Array Format으로 저장
