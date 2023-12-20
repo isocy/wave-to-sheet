@@ -16,13 +16,20 @@
             <source src="{{url_for('static', filename='audio/'+filename)}}" type="audio/wav">
             지원하지 않는 포맷입니다.
         </audio>
+        <br><br>
+        <form action="http://localhost:5000/download/{{filename}}"
+                  method="GET"
+                  enctype="multipart/form-data">
+                <input type="submit" value="악보 다운로드" />
+        </form>
+        <br><br>
     </div>
     <hr width="100%" color="black"/>
     <div align="center" class="sheet" style="position: relative">
         {% if sheets | length > 1: %}
         <button type="button" id="prev"
                 style="position: fixed;
-        top: 50%;
+        top: 70%;
         margin-top: -50px;
         left: 10%;
         background-color: white;
@@ -37,7 +44,7 @@
         {% if sheets | length > 1 : %}
         <button type="button" id="next"
                 style="position: fixed;
-        top: 50%;
+        top: 70%;
         margin-top: -50px;
         right: 10%;
         background-color: white;

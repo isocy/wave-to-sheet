@@ -39,6 +39,7 @@ tf.app.flags.DEFINE_string(
 
 def create_example(filename, sample_rate, load_audio_with_librosa):
   """Processes an audio file into an Example proto."""
+
   wav_data = tf.gfile.Open(filename, 'rb').read()
   example_list = list(
       audio_label_data_utils.process_record(
@@ -95,9 +96,7 @@ def run(argv, config_map, data_fn):
         # a temporary tfrecord file.
         # tf.logging.info('Processing file...')
         sess.run(iterator.initializer,
-                 {examples: [
-                     create_example(filename, hparams.sample_rate,
-                                    FLAGS.load_audio_with_librosa)]})
+                 {examples: [create_example(filename, hparams.sample_rate,FLAGS.load_audio_with_librosa)]})
 
         def transcription_data(params):
           del params
@@ -136,7 +135,7 @@ def wav_to_midi(filename):
     FLAGS.config = 'onsets_frames'
     FLAGS.model_dir = './models/maestro'
 
-    wav_path = 'uploads\\\\'+filename
+    wav_path = 'static\\\\audio\\\\'+filename
     argv = [wav_path]
 
     run(argv, config_map=configs.CONFIG_MAP, data_fn=data.provide_batch)
